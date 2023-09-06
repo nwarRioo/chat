@@ -1,4 +1,3 @@
-export default interface ITopicCreateDtop {
+export default interface ITopicCreateDto {
     name: string
-    user_id: string
 }

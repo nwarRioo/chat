@@ -4,6 +4,7 @@ import cors from 'cors';
 import { mongo } from "./repository/mongo";
 import { UsersController } from "./controllers/usersController"
 import { AuthController } from "./controllers/authController";
+import { TopicsController } from "./controllers/topicsController";
 dotenv.config();
 
 class App {
@@ -22,6 +23,7 @@ class App {
             });
             this.app.use('/users', new UsersController().getRouter());
             this.app.use('/auth', new AuthController().getRouter());
+            this.app.use('/topics', new TopicsController().getRouter());
             this.app.listen(process.env.APP_PORT, () => {
                 console.log(`Server is running on port ${process.env.APP_PORT}`);
             });

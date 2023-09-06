@@ -8,6 +8,10 @@ import IUserCreateDto from "../interfaces/IUser/IUserCreateDto";
 import IUserGetDto from "../interfaces/IUser/IUserGetDto";
 import { checkPassword } from "../helpers/checkPassword";
 import { generateHash } from "../helpers/generateHash";
+import ITopicGetDto from "../interfaces/ITopic/ITopicGetDto";
+import ITopicCreateDto from "../interfaces/ITopic/ITopicCreateDto";
+import { Topic } from "../models/Topic";
+import ITopic from "../interfaces/ITopic/ITopic";
 
 export class Mongo {
     private client: Mongoose | null = null;
@@ -70,7 +74,7 @@ export class Mongo {
             await foundUser.save();
             const data = {
                 login: foundUser.login,
-                token: generateJWT({ id: foundUser.id, username: foundUser.login })
+                token: generateJWT({ id: foundUser.id, login: foundUser.login })
             };
             const response = {
                 status: StatusCodes.OK,
@@ -87,6 +91,72 @@ export class Mongo {
             return response;
         };
     };
+
+    public getTopics = async (): Promise<IResponse<ITopicGetDto[] | undefined>> => {
+        try {
+            const topics = await Topic.find().populate('user_id').sort({ datetime: 'desc' });
+            
+
+            const response: IResponse<ITopicGetDto[]> = {
+                status: StatusCodes.OK,
+                result: topics,
+            };
+            return response;
+        } catch (err: unknown) {
+            const error = err as Error
+            const response: IResponse<undefined> = {
+                status: StatusCodes.BAD_REQUEST,
+                result: undefined,
+            };
+            return response;
+        };
+    };
+
+    public getTopicById = async (id: string): Promise<IResponse<ITopicGetDto | undefined>> => {
+        try {
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) throw new Error('Id is not valid!');
+            const foundTopic: ITopicGetDto | null = await Topic.findById(id).populate('user_id');
+            if (!foundTopic) throw new Error('This topic is not found.');
+
+            const response: IResponse<ITopic | undefined> = {
+                status: StatusCodes.OK,
+                result: foundTopic,
+            };
+            return response;
+        } catch (err: unknown) {
+            const error = err as Error
+            const response: IResponse<undefined> = {
+                status: StatusCodes.BAD_REQUEST,
+                result: undefined,
+            };
+            return response;
+        };
+    };
+
+    public addTopic = async (userId: string, topic: ITopicCreateDto): Promise<IResponse<ITopicGetDto | undefined>> => {
+        try {
+            const foundUser = await User.findById(userId);
+            if (!foundUser) throw new Error('Unauthorized!');
+
+            if (topic.name === undefined || topic.name.trim() === '') throw new Error('Topic name is required!');
+            
+            const newTopic = new Topic({ ...topic, user_id: userId });
+            const data = await newTopic.save();
+            const response: IResponse<ITopicGetDto> = {
+                status: StatusCodes.OK,
+                result: data,
+            };
+            return response;
+        } catch (err: unknown) {
+            const error = err as Error
+            const response: IResponse<undefined> = {
+                status: StatusCodes.BAD_REQUEST,
+                result: undefined,
+            };
+            return response;
+        };
+    };
+
 
 };
 
