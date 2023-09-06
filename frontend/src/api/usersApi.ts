@@ -8,7 +8,7 @@ class UserApi {
     
     public login = async (user: IUserLoginDto): Promise<IResponse<IUserGetDto | undefined>> => {
         try {
-            const response = await instance.post('/users/login', user);
+            const response = await instance.post('/auth', user);
             return response.data;
         } catch (err: unknown) {
             const error = err as Error;

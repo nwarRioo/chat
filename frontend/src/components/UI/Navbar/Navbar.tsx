@@ -26,7 +26,7 @@ const Navbar: FunctionComponent = (): ReactElement => {
                         </>
                         <>
                             <NavLink className={styles.nav_link} to={'/register'}>Register</NavLink>
-                            <NavLink className={styles.nav_link} to={'/login'}>Login</NavLink>
+                            <NavLink className={styles.nav_link} to={'/auth'}>Login</NavLink>
                         </>
                 </nav>
             </div>
