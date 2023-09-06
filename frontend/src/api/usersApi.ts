@@ -1,33 +1,34 @@
-import IResponse from "../interfaces/IResponse";
+import IResponse from "../interfaces/IResponse"
 import IUserCreateDto from "../interfaces/IUser/IUserCreateDto";
 import IUserGetDto from "../interfaces/IUser/IUserGetDto";
+import IUserLoginDto from "../interfaces/IUser/IUserLoginDto";
 import { instance } from "./instance"
 
 class UserApi {
     
-    public login = async (user: IUserGetDto): Promise<IResponse<IUserGetDto | string>> => {
+    public login = async (user: IUserLoginDto): Promise<IResponse<IUserGetDto | undefined>> => {
         try {
             const response = await instance.post('/users/login', user);
             return response.data;
         } catch (err: unknown) {
             const error = err as Error;
-            const response = {
-                status: error.name,
-                result: error.message,
+            const response: IResponse<undefined> = {
+                status: error.message,
+                result: undefined,
             };
             return response;
         }
     };
 
-    public register = async (user: IUserCreateDto): Promise<IResponse<IUserGetDto | string>> => {
+    public register = async (user: IUserCreateDto): Promise<IResponse<IUserGetDto | undefined>> => {
         try {
             const response = await instance.post('/users', user);
             return response.data;
         } catch (err: unknown) {
             const error = err as Error;
-            const response = {
-                status: error.name,
-                result: error.message,
+            const response: IResponse<undefined> = {
+                status: error.message,
+                result: undefined,
             };
             return response;
         }
@@ -39,13 +40,13 @@ class UserApi {
             return response.data;
         } catch (err: unknown) {
             const error = err as Error
-            const response: IResponse<undefined> = {
+            const response = {
                 status: error.message,
                 result: undefined,
             };
             return response;
         }
-    };
+    }
 }
 
 export const userApi = new UserApi();

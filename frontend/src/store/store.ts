@@ -1,10 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 import { useDispatch } from 'react-redux'
+import { usersSlice } from "./users/users.slice";
 
 const makeStore = () => {
     return configureStore({
         reducer: {
-                  
+            users: usersSlice.reducer   
         }
     });
 };
