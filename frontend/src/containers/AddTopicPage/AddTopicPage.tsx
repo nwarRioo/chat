@@ -35,17 +35,17 @@ const AddTopicPage: FC = (): ReactElement => {
     };
 
     return (
-        <div className="AddPostPage-container">
-            <div className="AddPostPage-background AddPostPage-flex-row">
-                <div className="AddPostPage">
-                    <h2 className="AddPostPage-title">Add new post:</h2>
-                    <div className="AddPostPage-form-column">
-                        {showAddError ? <p className='AddPostPage-error-text'>{errorAddMessage}</p> : null}
+        <div className="AddTopicPage-container">
+            <div className="AddTopicPage-background AddTopicPage-flex-row">
+                <div className="AddTopicPage">
+                    <h2 className="AddTopicPage-title">Add new Topic:</h2>
+                    <div className="AddTopicPage-form-column">
+                        {showAddError ? <p className='AddTopicPage-error-text'>{errorAddMessage}</p> : null}
                         <form onSubmit={submitHandler} className="">
-                            <div className="AddPostPage-form-box">
-                                <label className="AddPostPage-label" htmlFor='name'>Name:</label>
-                                <p className='AddPostPage-error-text'>{TitleErrorMessage}</p>
-                                <input className={'AddPostPage-input'}
+                            <div className="AddTopicPage-form-box">
+                                <label className="AddTopicPage-label" htmlFor='name'>Name:</label>
+                                <p className='AddTopicPage-error-text'>{TitleErrorMessage}</p>
+                                <input className={'AddTopicPage-input'}
                                     type="text"
                                     onChange={inputHandler}
                                     name={'name'}
