@@ -1,0 +1,13 @@
+.topic {
+    cursor: pointer;
+    color: white;
+    background-color: #6A5ACD;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 9px black;
+    margin: 10px 0;
+}
+
+.topic:hover {
+    scale: 1.01;
+}

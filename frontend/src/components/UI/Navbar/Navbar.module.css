@@ -1,0 +1,39 @@
+.header {
+    background-color: #313866;
+    padding: 10px 0;
+}
+
+.container {
+    margin: 0 auto;
+    width: 980px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav_links_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav_link {
+    color: rgba(250, 250, 250, 0.7);
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    align-self: baseline;
+    cursor: pointer
+}
+
+.nav_link:hover {
+    color: white;
+}
+
+.nav_username {
+    color: white;
+}
