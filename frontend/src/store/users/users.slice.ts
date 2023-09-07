@@ -19,7 +19,6 @@ export const register = createAppAsyncThunk(
     
     `${namespace}/register`,
     async (user: IUserCreateDto) => {
-        console.log("HELLO")
         return userApi.register(user);
     }
 );
@@ -71,7 +70,6 @@ export const usersSlice = createSlice({
                     state.loginErrorMessage = '';
                     const user = action.payload.result;
                     state.user = user;
-                    console.log("hello")
                     if (user) {
                         localStorage.setItem('token', user.token);
                         state.isAuth = true;

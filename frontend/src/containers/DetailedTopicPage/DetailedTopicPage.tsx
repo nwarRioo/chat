@@ -19,10 +19,20 @@ const DetailedTopicPage: FC = (): ReactElement => {
     useEffect(() => {
         dispatch(checkToken());
         if (params.id) {
-            dispatch(getMessagesByTopicId(params.id as string))
             dispatch(getTopicById(params.id as string))
         };
     }, []);
+
+    useEffect(() => {
+        const fetchData = () => {
+            if (params.id) {
+                dispatch(getMessagesByTopicId(params.id as string));
+            }
+        };
+        fetchData();
+        const intervalId = setInterval(fetchData, 10000);
+        return () => clearInterval(intervalId);
+    }, [params.id]);
 
     const { isAuth } = useSelector((state: AppState) => state.users, shallowEqual);
 

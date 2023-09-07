@@ -165,7 +165,6 @@ export class Mongo {
         try {
             const user = await User.findById(id);
             if (!user) throw new Error('Unauthorized!');
-            console.log(messageDto.topic_id)
             const topic = await Topic.findById(messageDto.topic_id);
             if (!topic) throw new Error('There is not this topic!');
             if (messageDto.text === undefined || messageDto.text.trim() === '')
