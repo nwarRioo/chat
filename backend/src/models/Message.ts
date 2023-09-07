@@ -15,6 +15,11 @@ const MessageSchema: Schema = new Schema<IMessage>({
     text: {
         type: String,
         required: true
+    },
+    datetime: {
+        type: Date,
+        required: true,
+        default: Date.now
     }
 }, {
     versionKey: false

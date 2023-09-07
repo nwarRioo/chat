@@ -1,7 +1,7 @@
-import IMessageGetDto from "../../interfaces/IMessage/IMessageGetDto"
+import IMessageWithUser from "../../interfaces/IMessage/IMessageWithUser"
 
 export default interface IMessagesState {
-    messages: IMessageGetDto[]
+    messages: IMessageWithUser[]
     showError: boolean
     errorMessage: string
     showAddError: boolean

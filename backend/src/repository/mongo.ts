@@ -191,7 +191,7 @@ export class Mongo {
         try {
             const user = await User.findById(userId);
             if (!user) throw new Error('Unauthorized!');
-            const data = await Message.find({ topic_id: id }).sort({ datetime: 'desc' }).populate('user_id', 'login')
+            const data = await Message.find({ topic_id: id }).sort({ datetime: 'asc' }).populate('user_id', 'login')
             const response: IResponse<IMessage[]> = {
                 status: StatusCodes.OK,
                 result: data,

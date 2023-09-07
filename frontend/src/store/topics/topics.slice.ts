@@ -3,6 +3,7 @@ import { topicsApi } from '../../api/topicsApi';
 import { createAppAsyncThunk } from '../createAppAsyncThunk';
 import ITopicsState from './ITopicsState';
 import ITopicGetDto from '../../interfaces/ITopic/ITopicGetDto';
+import ITopicCreateDto from '../../interfaces/ITopic/ITopicCreateDto';
 
 const namespace = 'topics';
 
@@ -19,6 +20,14 @@ export const getTopicById = createAppAsyncThunk(
         return topicsApi.getTopicById(id);
     }
 );
+
+export const addTopic = createAppAsyncThunk(
+    `${namespace}/addTopic`,
+    async (topic: ITopicCreateDto) => {
+        return topicsApi.addTopic(topic)
+    }
+);
+
 
 export const topicsSlice = createSlice({
     name: namespace,
@@ -64,6 +73,21 @@ export const topicsSlice = createSlice({
                     state.showError = true;
                 }
             })
+            .addCase(addTopic.rejected, (state) => {
+                state.showError = true;
+                state.errorMessage = 'Connection error';
+            })
+            .addCase(addTopic.fulfilled, (state, action) => {
+                if (action.payload.status === 0) {
+                    state.showAddError = true;
+                    const topic = action.payload.result;
+                    if (topic) state.topics.unshift(topic);
+                } else {
+                    state.showError = false;
+                    state.errorMessage = '';
+                };
+            })
+
     }
 });
 

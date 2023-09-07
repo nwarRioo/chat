@@ -1,15 +1,20 @@
 ﻿import React, { useEffect } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { AppState } from '../store/store';
+import { AppDispatch, AppState } from '../store/store';
+import { checkToken } from '../store/users/users.slice';
 
 const PrivateRoute: React.FunctionComponent = (): React.ReactElement => {
 
     const { isAuth } = useSelector((state: AppState) => state.users, shallowEqual);
     const location = useLocation();
+    const dispatch: AppDispatch = useDispatch();
+
 
     useEffect(() => {
+        dispatch(checkToken())
     }, []);
+
     
     return (
         isAuth

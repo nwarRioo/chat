@@ -8,6 +8,7 @@ import { getTopicById } from '../../store/topics/topics.slice';
 import { Container } from '../../components/UI/Container/Container';
 import { getMessagesByTopicId } from '../../store/messages/messages.slice';
 import AddMessageForm from '../../components/AddMessageForm/AddMessageForm';
+import Message from '../Message/Message';
 
 const DetailedTopicPage: FC = (): ReactElement => {
     const dispatch: AppDispatch = useDispatch();
@@ -28,17 +29,19 @@ const DetailedTopicPage: FC = (): ReactElement => {
     return (
         <Container>
             <div className={styles.DetailedTopicPage}>
-                <h1>{detailedTopic.name}</h1>
-                {!messages.length ?
-                    <h2>No messages yet</h2>
-                    : null
-                }
+                <h1>Topic name: <span className={styles.topicName}>{detailedTopic.name}</span></h1>
+                <h2>Messages:</h2>
+                {messages.length ? messages.map(message => {
+                        return <Message
+                            key={message._id}
+                            message={message}
+                        />
+                    }) : <h2>No messages yet</h2>}
                 <div className="AddCommentBlock">
                     {isAuth ? <AddMessageForm /> : null}
                 </div>
             </div>
         </Container>
-        
     )
 };
 

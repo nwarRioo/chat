@@ -1,10 +1,10 @@
 import IMessageCreateDto from "../interfaces/IMessage/IMessageCreateDto";
-import IMessageGetDto from "../interfaces/IMessage/IMessageGetDto";
+import IMessageWithUser from "../interfaces/IMessage/IMessageWithUser";
 import IResponse from "../interfaces/IResponse";
 import { instance } from "./instance";
 
 class MessagesApi {
-    public getMessagesByTopicId = async (topicId: string): Promise<IResponse<IMessageGetDto[] | undefined>> => {
+    public getMessagesByTopicId = async (topicId: string): Promise<IResponse<IMessageWithUser[] | undefined>> => {
         try {
             const response = await instance.get(`/messages?topic=${topicId}`);
             return response.data;
@@ -17,7 +17,7 @@ class MessagesApi {
         };
     };
 
-    public addMessage = async (message: IMessageCreateDto): Promise<IResponse<IMessageGetDto | undefined>> => {
+    public addMessage = async (message: IMessageCreateDto): Promise<IResponse<IMessageWithUser | undefined>> => {
         try {
             const response = await instance.post('/messages', message);
             return response.data;

@@ -25,13 +25,17 @@ const Navbar: FunctionComponent = (): ReactElement => {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Logo />
+                
                 <nav className={styles.nav_links_row}>
                         {isAuth && user ?
                         <>
                             <p className={styles.nav_username}>
                                 {user.login}
                             </p>
+                            <NavLink className={styles.nav_link} to={'/add-topic'}>Add new topic</NavLink>
+                            <NavLink className={styles.nav_link} to={'/'}>Topics</NavLink>
                             <button className={styles.nav_link} onClick={logoutHandler}>Logout</button>
+                            
                         </>
                         :
                         <>

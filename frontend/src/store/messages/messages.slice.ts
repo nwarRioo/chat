@@ -2,9 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { messagesApi } from '../../api/messagesApi';
 import { createAppAsyncThunk } from '../createAppAsyncThunk';
 import IMessageCreateDto from '../../interfaces/IMessage/IMessageCreateDto';
-import IMessageGetDto from '../../interfaces/IMessage/IMessageGetDto';
 import IMessagesState from './IMessagesState';
-
+import IMessageWithUser from '../../interfaces/IMessage/IMessageWithUser';
 
 const namespace = 'messages';
 
@@ -25,7 +24,7 @@ export const addMessage = createAppAsyncThunk(
 export const messagesSlice = createSlice({
     name: namespace,
     initialState: {
-        messages: [] as IMessageGetDto[],
+        messages: [] as IMessageWithUser[],
         showError: false,
         errorMessage: '',
         showAddError: false,
@@ -47,7 +46,7 @@ export const messagesSlice = createSlice({
             })
             .addCase(getMessagesByTopicId.fulfilled, (state, action) => {
                 if (action.payload.status === 200) {
-                    const result = action.payload.result as IMessageGetDto[]
+                    const result = action.payload.result as IMessageWithUser[]
                     state.messages = result;
                 } else {
                     state.showError = true;
@@ -61,9 +60,9 @@ export const messagesSlice = createSlice({
                 if (action.payload.status === 0) {
                     state.showAddError = true;
                 } else {
-                    const comment = action.payload.result;
-                    if (comment) { 
-                        state.messages.unshift(comment);
+                    const message = action.payload.result;
+                    if (message) { 
+                        state.messages.push(message);
                     };
                     state.showAddError = false;
                     state.errorAddMessage = '';

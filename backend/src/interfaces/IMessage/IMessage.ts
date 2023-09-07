@@ -3,4 +3,5 @@ export default interface IMessage {
     text: string
     user_id: string
     topic_id: string
+    datetime: Date
 }
