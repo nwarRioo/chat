@@ -12,7 +12,7 @@ const TopicsPage: FunctionComponent = (): ReactElement => {
 
     useEffect(() => {
         dispatch(getTopics());
-    }, [topics]);
+    }, []);
 
     return (
         <div className="TopicsPage-container">

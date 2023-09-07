@@ -11,7 +11,7 @@ const Topics: React.FunctionComponent<ITopicsProps> = ({topics}) => {
         <>
             {topics.map((topic) => {
                 return <Topic
-                    key={topic.id}
+                    key={topic._id}
                     topic={topic}
                 />
             })}

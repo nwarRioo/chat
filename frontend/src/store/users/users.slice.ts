@@ -48,7 +48,6 @@ export const usersSlice = createSlice({
     initialState: initialState,
     reducers: {
         initState(state) {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             state = initialState
         },
         clearError(state) {

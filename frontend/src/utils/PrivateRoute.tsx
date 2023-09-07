@@ -16,7 +16,7 @@ const PrivateRoute: React.FunctionComponent = (): React.ReactElement => {
             ?
             <Outlet />
             :
-            <Navigate to='/login' replace state={{ from: location }} />
+            <Navigate to='/auth' replace state={{ from: location }} />
     )
 };
 
