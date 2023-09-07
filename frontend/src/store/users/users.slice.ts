@@ -67,18 +67,18 @@ export const usersSlice = createSlice({
                 state.loginErrorMessage = 'Connection error';
             })
             .addCase(login.fulfilled, (state, action) => {
-                if (action.payload.status === "200") {
+                if (action.payload.status === 200) {
                     state.loginShowError = false;
                     state.loginErrorMessage = '';
                     const user = action.payload.result;
                     state.user = user;
+                    console.log("hello")
                     if (user) {
                         localStorage.setItem('token', user.token);
                         state.isAuth = true;
                     }
                 } else {
                     state.loginShowError = true;
-                    state.loginErrorMessage = action.payload.status;
                 }
             })
             .addCase(register.rejected, (state) => {
@@ -86,7 +86,7 @@ export const usersSlice = createSlice({
                 state.registerErrorMessage = 'Connection error';
             })
             .addCase(register.fulfilled, (state, action) => {
-                if (action.payload.status === "201") {
+                if (action.payload.status === 201) {
                     state.registerShowError = false;
                     state.registerErrorMessage = '';
                     const user = action.payload.result;
@@ -97,7 +97,6 @@ export const usersSlice = createSlice({
                     }
                 } else {
                     state.registerShowError = true;
-                    state.registerErrorMessage = action.payload.status;
                 }
             })
             .addCase(checkToken.rejected, (state) => {
@@ -105,7 +104,7 @@ export const usersSlice = createSlice({
                 state.errorMessage = 'Connection error';
             })
             .addCase(checkToken.fulfilled, (state, action) => {
-                if (action.payload.status === "200") {
+                if (action.payload.status === 200) {
                     const user = action.payload.result;
                     state.user = user;
                     if (user) {
@@ -115,7 +114,6 @@ export const usersSlice = createSlice({
                     }
                 } else {
                     state.showError = true;
-                    state.errorMessage = action.payload.status;
                 }
             });
     }

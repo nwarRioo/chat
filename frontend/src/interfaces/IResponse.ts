@@ -1,5 +1,5 @@
 
 export default interface IResponse<T> {
-    status: string
+    status: number | string
     result: T
 }
