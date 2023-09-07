@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from 'express';
 import IResponse from '../interfaces/IResponse';
 import { Mongo, mongo } from '../repository/mongo';
 import IUserGetDto from '../interfaces/IUser/IUserGetDto';
-import { auth } from './middlewares/auth';
+import { auth } from '../middlewares/auth';
 import { StatusCodes } from 'http-status-codes';
 import IRequestWithTokenData from '../interfaces/IRequestWithTokenData';
 

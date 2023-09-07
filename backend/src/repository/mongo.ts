@@ -12,6 +12,10 @@ import ITopicGetDto from "../interfaces/ITopic/ITopicGetDto";
 import ITopicCreateDto from "../interfaces/ITopic/ITopicCreateDto";
 import { Topic } from "../models/Topic";
 import ITopic from "../interfaces/ITopic/ITopic";
+import IMessageGetDto from "../interfaces/IMessage/IMessageGetDto";
+import IMessage from "../interfaces/IMessage/IMessage";
+import IMessageCreateDto from "../interfaces/IMessage/IMessageCreateDto";
+import { Message } from "../models/Message";
 
 export class Mongo {
     private client: Mongoose | null = null;
@@ -155,6 +159,53 @@ export class Mongo {
             };
             return response;
         };
+    };
+
+    public addMessage = async (id: string, messageDto: IMessageCreateDto): Promise<IResponse<IMessageGetDto | undefined>> => {
+        try {
+            const user = await User.findById(id);
+            if (!user) throw new Error('Unauthorized!');
+            console.log(messageDto.topic_id)
+            const topic = await Topic.findById(messageDto.topic_id);
+            if (!topic) throw new Error('There is not this topic!');
+            if (messageDto.text === undefined || messageDto.text.trim() === '')
+                throw new Error('Text is required!');
+            const message = new Message({ ...messageDto, 'user_id': user?._id })
+            const data = await message.save()
+            const response = {
+                status: StatusCodes.OK,
+                result: data,
+            }
+            return response
+        } catch (err: unknown) {
+            const error = err as Error
+            const response: IResponse<undefined> = {
+                status: StatusCodes.BAD_REQUEST,
+                result: undefined,
+            }
+            return response
+        }
+    }
+
+    public getMessagesByTopic = async (userId: string, id: string): Promise<IResponse<IMessageGetDto[] | undefined>> => {
+        try {
+            const user = await User.findById(userId);
+            if (!user) throw new Error('Unauthorized!');
+            const data = await Message.find({ topic_id: id }).sort({ datetime: 'desc' }).populate('user_id', 'login')
+            const response: IResponse<IMessage[]> = {
+                status: StatusCodes.OK,
+                result: data,
+            }
+            return response
+
+        } catch (err: unknown) {
+            const error = err as Error
+            const response: IResponse<undefined> = {
+                status: StatusCodes.BAD_REQUEST,
+                result: undefined,
+            }
+            return response
+        }
     };
 
 

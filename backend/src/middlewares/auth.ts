@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import IResponse from "../../interfaces/IResponse";
+import IResponse from "../interfaces/IResponse";
 import { StatusCodes } from "http-status-codes";
-import IRequestWithTokenData from "../../interfaces/IRequestWithTokenData";
+import IRequestWithTokenData from "../interfaces/IRequestWithTokenData";
 
 export const auth = (expressReq: Request, res: Response, next: NextFunction) => {
     const req = expressReq as IRequestWithTokenData

@@ -28,9 +28,9 @@ const Navbar: FunctionComponent = (): ReactElement => {
                 <nav className={styles.nav_links_row}>
                         {isAuth && user ?
                         <>
-                            <span className={styles.nav_username}>
+                            <p className={styles.nav_username}>
                                 {user.login}
-                            </span>
+                            </p>
                             <button className={styles.nav_link} onClick={logoutHandler}>Logout</button>
                         </>
                         :

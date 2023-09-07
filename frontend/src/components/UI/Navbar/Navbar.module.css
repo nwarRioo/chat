@@ -13,6 +13,8 @@
 
 .nav_links_row {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -24,11 +26,14 @@
     outline: none;
     border: none;
     background-color: transparent;
-    line-height: 100%;
     align-self: baseline;
     cursor: pointer
 }
 
 .nav_link:hover {
+    color: white;
+}
+
+.nav_username {
     color: white;
 }

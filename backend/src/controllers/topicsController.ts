@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from 'express';
 import IResponse from '../interfaces/IResponse';
 import IRequestWithTokenData from '../interfaces/IRequestWithTokenData';
-import { auth } from './middlewares/auth';
+import { auth } from '../middlewares/auth';
 import ITopicGetDto from '../interfaces/ITopic/ITopicGetDto';
 import IUserGetDto from '../interfaces/IUser/IUserGetDto';
 import { Mongo, mongo } from '../repository/mongo';

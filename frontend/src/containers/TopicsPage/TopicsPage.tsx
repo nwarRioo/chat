@@ -1,9 +1,10 @@
 import { FunctionComponent, ReactElement, useEffect } from "react";
 import { AppDispatch, AppState } from "../../store/store";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import './TopicsPage.css';
+import styles from './TopicsPage.module.css';
 import { getTopics } from "../../store/topics/topics.slice";
 import Topics from "../../components/Topics/Topics";
+import { Container } from "../../components/UI/Container/Container";
 
 const TopicsPage: FunctionComponent = (): ReactElement => {
 
@@ -15,19 +16,17 @@ const TopicsPage: FunctionComponent = (): ReactElement => {
     }, []);
 
     return (
-        <div className="TopicsPage-container">
-            <div className="TopicsPage-background TopicsPage-flex-row">
-                <div className="TopicsPage-column">
-                    <h2 className="TopicsPage-title">Topics:</h2>
-                    {showError ? <p className='TopicsPage-error-text'>{errorMessage}</p> : null}
-                    {topics === undefined || !topics.length ?
-                        <p className='TopicsPage-error-text'>No topics</p>
-                        :
-                        <Topics topics={topics} />
-                    }
-                </div>
+        <Container>
+            <div className={styles.topicsList}>
+                <h2 className={styles.topicsHead}>Topics:</h2>
+                {showError ? <p className={styles.errorMessage}>{errorMessage}</p> : null}
+                {topics === undefined || !topics.length ?
+                    <p>No topics</p>
+                    :
+                    <Topics topics={topics} />
+                }
             </div>
-        </div>
+        </Container>
     );
 };
 

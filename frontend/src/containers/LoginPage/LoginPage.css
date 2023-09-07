@@ -6,7 +6,7 @@
     width: 100%;
     min-height: calc(100vh - 67px);
     margin: 0 auto;
-    background-color: rgb(90, 77, 90);
+    background-color: #6A5ACD;
 }
 
 .LoginPage-flex-row {

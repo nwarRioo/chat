@@ -5,6 +5,7 @@ import { AppDispatch, AppState } from '../../store/store';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { checkToken } from '../../store/users/users.slice';
 import { getTopicById } from '../../store/topics/topics.slice';
+import { Container } from '../../components/UI/Container/Container';
 
 const DetailedTopicPage: FC = (): ReactElement => {
     const dispatch: AppDispatch = useDispatch();
@@ -19,9 +20,12 @@ const DetailedTopicPage: FC = (): ReactElement => {
     }, []);
 
     return (
-        <div className={styles.DetailedTopicPage}>
-            <h1>{detailedTopic.name}</h1>
-        </div>
+        <Container>
+            <div className={styles.DetailedTopicPage}>
+                <h1>{detailedTopic.name}</h1>
+            </div>
+        </Container>
+        
     )
 };
 
