@@ -78,6 +78,7 @@ export const usersSlice = createSlice({
                     }
                 } else {
                     state.loginShowError = true;
+                    state.loginErrorMessage = "Not correct login or password";
                 }
             })
             .addCase(register.rejected, (state) => {
